@@ -1,7 +1,7 @@
 
 DBJ AUTO LISP Run-Time for RUN plugins  
 --------------------------------------  
-"DBJ AUTO LISP Lore"&trade';  Series
+Part one of "DBJ AUTO LISP Lore"&trade;  Series
 
 &copy; 1992-2013 by dbj();
 Licensed under the MIT (MIT-LICENSE.txt)  
