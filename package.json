@@ -7,7 +7,7 @@
   "description" : "AutoLISP plugins runtime",
   "repository" : {
 		  "type" : "git" ,
-		  "url"  : "https://github.com/DBJDBJ/dbj.cond.git"
+		  "url"  : "https://github.com/DBJDBJ/AUTO-LISP-RUN.git"
   },
   "keywords": ["AutoCAD", "AutoLISP", "LISP"],
   "analyze" : false,
