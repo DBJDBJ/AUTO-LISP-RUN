@@ -1,0 +1,53 @@
+;
+; load.run DBJ created 27.02.92
+;
+; The main entry point into the RUN(tm) system
+;
+;------------------------------------------------------------------------
+(prompt "\n*** RUN system V6 *** (c) by ACCAD Group Oct 1998")
+;------------------------------------------------------------------------
+; reserved globals
+;------------------------------------------------------------------------
+(setq runpath 		(getenv "RUNENVPATH") ; this is default position 
+      run::home		runpath ; was -> home    (getenv "HOME")
+      run::symdir  	(getenv "RUNSYMDIR") 
+      function nil 
+      runfun   nil
+      runlst   '()
+      run::envpath  run::home ; home of the current environment
+      ) 
+;------------------------------------------------------------------------
+(if (null run::home)
+    (progn     (textscr)
+               (prompt "\nAcad.lsp AutoLisp error ...")
+               (prompt "\nRUNENVPATH system environment variable is not defined ...") 
+               (prompt "\nRUN system not loaded ...") 
+	       (prompt "\nCall system administrator for help ...")
+    ) ; progn
+    ( if ; else wake up the RUN system
+	 (= nil (findfile (strcat run::home "/run.run")))
+   	 (progn (textscr)
+       	        (prompt "\nAcad.lsp AutoLisp error ...")
+       	        (prompt "\nRUNENVPATH system environment variable is defined as [") 
+       	        (princ runpath)(princ "]")
+       	        (prompt "\nThis is not where the RUN system files are ?") 
+                (prompt "\nCall system administrator for help ...")
+          ) ; progn
+	 (progn
+               (load (strcat run::home "/run.run")) ; core functions
+               (setq run::envname "default")       ; environment name
+               (setq run::envpath (strcat run::home "/" run::envname)) ; environment home
+	       (run::call '("loadenv" run::envname) ) ; load default environment
+         )
+    );if
+); if 
+;------------------------------------------------------------------------
+;
+(defun c:ondebug  ()(load (strcat run::home "/debug.run")))
+;------------------------------------------------------------------------
+(defun c:offdebug ()(load (strcat run::home "/run.run"))
+       (setq debugwrite nil atommarker nil debugname nil)
+)
+;------------------------------------------------------------------------
+(princ)
+;------------------------------------------------------------------------

@@ -1,0 +1,13 @@
+;
+; layon.run dbj created
+; go on requested layer , make it if it does not exist
+; in default color
+(setq runfun
+(lambda ( lname )
+  (setvar "cmdecho" 0)
+  (tblnext "layer" T)
+  (if (= nil (tblsearch "layer" lname ))
+      (command ".layer" "make" lname "")
+  )
+  (command ".layer" "thaw" lname "set" lname "")
+))

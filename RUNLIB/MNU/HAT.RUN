@@ -1,0 +1,10 @@
+;;
+;;hat.run
+;;
+(setq runfun
+(lambda ()
+   (if (/= runenvname "default")
+       (runcall '("loadenv" "default"))
+   )
+       (call "hat")
+));hat

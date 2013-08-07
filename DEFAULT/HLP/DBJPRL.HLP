@@ -1,0 +1,5 @@
+------------------------------------------------------------------------
+dbjprl
+draws a two parallel lines on a given distance, by asking for a start
+and end points of first line. second, parallel line, is always drawn 
+on the right side of the first one.

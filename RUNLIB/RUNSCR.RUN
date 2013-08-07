@@ -1,0 +1,22 @@
+; runscr.run 30.01.92 DBJ created
+; Preparing AutoCad SCR file on exact position
+; what  = list of strings = what to put in a script
+;                           every string is one line in
+;                           a script, FIRST string is
+;                           file name with FULL
+;                           path for placement of a SCR file
+(setq runfun
+(lambda ( what / f )
+        (setq *error* run::errhandler  )
+		(setq f (open (car what) "w")
+		        what (cdr what)
+		)
+		(if f (while what
+		         (write-line (car what) f)
+			 (setq what  (cdr what))
+                     )
+		     (run::errhandler "Unable to write file in RUNSCR.RUN")
+                ) ; if
+		(close f)
+) ; lambda        
+) ; set

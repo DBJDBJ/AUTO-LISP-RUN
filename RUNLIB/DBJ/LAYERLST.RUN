@@ -1,0 +1,24 @@
+; return layer list in format (name ltype color frozen? )
+; or nil 
+(setq runfun
+(lambda ( name / c d f ln lt ly n x return )
+(defun fld (num lst) (cdr (assoc num lst)))
+   (setq name (strcase name)  
+          x (tblnext "layer" T))        ; get first layer
+   (if (/= name (fld 2 x))
+    (setq x  (tblsearch "layer" name))  ; get first layer
+   )
+   (if (/= x nil)
+      (setq ly (fld  2 x)               ; layer name
+            ln (fld  6 x)               ; linetype name
+            c  (fld 62 x)               ; color number
+            f  (logand (fld 70 x) 1)    ; "frozen" flag
+          ; lt (tblsearch "ltype" ln)   ; linetype table entry
+          ; d  (fld  3 lt)              ; linetype prose description
+        return (list ly ln c f)
+      )
+      (setq return nil)
+   );if
+return
+) ; lambda
+) ; function

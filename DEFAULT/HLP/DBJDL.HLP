@@ -1,0 +1,10 @@
+----------------------------------------------------------------------------
+dbjdl
+placing of a chain of a dim lines by intersecting a temporary line with
+all entities on its way. chain is parralel to the direction line on a 
+distance defined by user for every use. if you are cutting for example 
+orthogonaly all the grid lines that you have, dbjdl will calculate and 
+put dim lines for a grid on a distance from cutting line and parallel to
+it. cutting line is deleted and proper dims are drawn.
+at present dbjdl is not placing dim's on any special layer.
+

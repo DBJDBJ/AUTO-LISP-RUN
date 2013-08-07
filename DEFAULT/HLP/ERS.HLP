@@ -1,0 +1,4 @@
+---------------------------------------------------------------------------
+ers
+returns intersection point of two non overlaping,or overlaping lines . 
+result is a point so main use is as a osnap, from assist menu.

@@ -1,0 +1,10 @@
+;;
+;;a1plot.run
+;;
+(setq runfun
+(lambda ()
+   (if (/= runenvname "default")
+       (runcall '("loadenv" "default"))
+   )
+       (call "a1plot")
+));a1plot

@@ -1,0 +1,12 @@
+-----------------------------------------------------------------------------
+enviroment : SYM
+list of functions available
+    ?<function> is help text for every <function>
+-----------------------------------------------------------------------------
+exit                      ; exiting the system
+test                      ; for developers only
+CREATE  ?CREATE           ; Symbol external presentation
+INSERT  ?INSERT           ; Insert symbol using block entity
+UPDATE  ?UPDATE           ; Change symbol external presentation
+DELETE  ?DELETE           ; Delete symbol internaly
+OBTAIN  ?OBTAIN           ; Extract symbol text data

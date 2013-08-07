@@ -1,0 +1,4 @@
+-----------------------------------------------------------------------------
+dbjbox
+creates a rectangular box, by picking diagonaly oposite drawings. 
+possible only in plan views, ie orthogonal views.

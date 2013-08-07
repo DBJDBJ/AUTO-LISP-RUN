@@ -1,0 +1,9 @@
+--------------------------------------------------------------------------- 
+create
+
+create the symbol
+
+Converts selection of AutoCad entities into a symbol and makes it
+internaly as a usual block
+
+---------------------------------------------------------------------------

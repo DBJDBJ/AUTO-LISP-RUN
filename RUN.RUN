@@ -1,0 +1,98 @@
+;
+; run.run 04.11.91 dbj created running the new autolisp functions
+; run.run 27.11.91 dbj created run v2.0
+;         29.11.91 dbj runlib & run::run::calluser created & implemented
+;-----------------------------------------------------------------------------
+;function to restore system on error
+;
+(defun run::errhandler ( s ) 
+       (setvar "cmdecho" 0)
+       (if (/= s "Function cancelled")
+       		(princ (strcat "\nRUN Error : " s))
+       );if
+       (setq *error* olderr)  (gc) ; garbage colection
+       (if (/= "acad" (getvar "menuname"))
+       (command ".menu" "acad")
+       )
+  (princ)
+)
+;---------------------------------------------------------------------------------
+;
+(defun c:run ( / run::command runold )
+(setq olderr *error* *error* run::errhandler)
+; environment menu if exist
+(setvar "cmdecho" 0)
+;(if (/= run::envname (getvar "menuname"))
+;    (if (findfile (strcat run::envpath "/" run::envname ".mnu"))
+;        (command ".menu" (strcat run::envpath "/" run::envname ))
+;    ) ; if
+;); if
+(setq run::command (chr 0) runold "exit")
+;
+; main loop
+;
+(while (/= "exit" run::command)
+  (gc)
+  (setq 
+    run::command (strcase (getstring  (strcat "\n" (substr run::envname 1 8) ": "))
+	    T)) 
+    (if (= (ascii run::command) 0) 
+        (setq run::command runold) ; return pressed, repeat last comand
+        (setq runold run::command) ; command typed, new last command
+    ) ; if
+     (if (/= "exit" run::command)
+        (cond 
+              ( (= "?" (substr run::command 1 1)) ; help request
+		(run::call '("callhlp" run::command))
+              )
+              ( (member run::command runlst) ; run::calluser a proper run::commandand 
+                (setq run::command (run::calluser run::command))
+              )
+              ( (= "#" (substr run::command 1 1)) ; new environment request
+		 (run::call '("loadenv" run::command))
+                  (if (/= run::envname (getvar "menuname"))
+                    (if (findfile (strcat run::envpath "/" run::envname ".mnu"))
+                       (command ".menu" (strcat run::envpath "/" run::envname ))
+                     ) ; if
+                   ); if
+              )
+              ( (= nil (member run::command runlst)); otherwise
+		(run::call '("runscr" (list (strcat run::home "/exit.scr") run::command)))
+		(setq run::command "exit")
+              ) 
+              (T nil)
+         );cond        
+     );if
+) ; while
+(run::call "exit")
+(setq *error* olderr)(gc)(princ)
+); end of c:run
+
+;-------------------------------------------------------------------------
+; run::calluser the non-system RUN function with or without input parameters
+; 06.11.91 dbj created
+; 25.11.91 dbj ammended to comply with V1.10
+; 26.11.91 dbj created RUN v2.00
+; 28.11.91 dbj "eval input" feature invented & implemented
+(defun run::calluser ( input / file function )
+  (if (= 'STR (type input)) (setq input (list input))) ; if
+  (setq file (car input) 
+       input (subst 'list (car input) input)
+  ) ; setq
+  (load (strcat run::envpath "/" file))
+(apply 'function (eval input))
+) ; run::calluser
+;-------------------------------------------------------------------------
+; run::calluser the "RUN" system function with or without input parameters
+; all run functions must have suffix ".run" and be situated in a
+; ../runenv/runlib/ directory
+; and word "runfun" must be used as a variable name for "applying"
+; 29.11.91 dbj created
+(defun run::call ( input / runfun )
+  (if (= 'STR (type input)) (setq input (list input))) ; if
+  (setq file (car input) 
+       input (subst 'list (car input) input)
+  ) ; setq
+  (load (strcat run::home "/runlib/" file ".run" ))
+(apply 'runfun (eval input))
+) ; run::calluser

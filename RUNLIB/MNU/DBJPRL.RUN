@@ -1,0 +1,10 @@
+;;
+;;dbjprl.run
+;;
+(setq runfun
+(lambda ()
+   (if (/= runenvname "default")
+       (runcall '("loadenv" "default"))
+   )
+       (call "dbjprl")
+));dbjprl

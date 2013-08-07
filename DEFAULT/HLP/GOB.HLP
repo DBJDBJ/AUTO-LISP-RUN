@@ -1,0 +1,8 @@
+------------------------------------------------------------------------------
+gob
+going to file with the same name as selected block or xreferenced drawing.
+so be careful to have the same names for a file and for a block during
+wblock command, if you intend to use gob.
+also gob will not find a files which are not in a different directory.
+best if used with gol and upd commands.
+

@@ -1,0 +1,22 @@
+; callhlp.run
+; load help
+; <function>.hlp is the shape of a help files
+; help path is run::envpath obtained from runpath, plus "hlp/" added
+; 25.11.91 dbj created
+; 29.11.91 dbj for runV2.0 created as a "runfun"
+; runfun's must use only runcall, ie no other than run functions
+; can be called from them .
+;------------------------------------------------------------------------------------
+(setq runfun
+(lambda ( funstr )
+    (if (= "?" funstr) ; just list of availables was requested
+	  (setq funstr "?hlp")
+    ) ; if
+    (setq funstr (substr funstr 2 (1- (strlen funstr))) ; take "?" off 
+          funstr (strcat run::envpath "/hlp/" funstr ".hlp" )
+    ) ; setq
+	(run::call '("dumptxt" funstr))
+ ( princ )
+); lambda
+); setq
+;------------------------------------------------------------------------------------

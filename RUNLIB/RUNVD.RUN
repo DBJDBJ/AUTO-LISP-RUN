@@ -1,0 +1,10 @@
+;
+; runvd.run DBJ created 27.02.92 12:16:99 GMT
+; run virtual digitizer plate 
+;
+(setq runfun
+   (lambda ( defname )
+        (command ".shell" (strcat "clap " defname ".def &"))
+        (command ".shell" "cd $HOME")
+   );lambda
+);funfun

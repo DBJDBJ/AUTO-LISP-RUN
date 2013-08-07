@@ -1,0 +1,21 @@
+;
+;  doscr.run 20.02.92 DBJ created
+; Performing AutoCad SCR file
+; what  = string = file name with FULL path for position of a SCR file
+;
+; DOS VERSION
+;
+(setq runfun
+(lambda ( what / olderr )
+        (setq 	olderr *error*
+        	*error* run::errhandler 
+        )
+        (setvar "cmdecho" 0)
+	(if (/= nil (findfile what))
+	    (progn  (command ".script" what )
+	            (command ".shell" (strcat "del " what))
+            )
+        ) ; if
+        (setq *error* olderr)
+) ; lambda        
+) ; set

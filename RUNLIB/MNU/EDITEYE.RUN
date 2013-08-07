@@ -1,0 +1,10 @@
+;;
+;;editeye.run
+;;
+(setq runfun
+(lambda ()
+   (if (/= runenvname "eye")
+       (runcall '("loadenv" "eye"))
+   )
+       (call "editeye")
+));editeye

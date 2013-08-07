@@ -1,0 +1,44 @@
+---------------------------------------------------------------------
+PEN
+
+author : DBJ
+
+Process entity through the chain of linked editting comands, and do
+that repeatedly if you like. Rotate, copy, move and scale are possible
+actions in this version.This chain of actions is called : 'action string',
+and can finish with number as a number of repetitions of a whole action
+string.Action string can consist only of following letters :
+
+R   : rotate and ask for base point and angle
+r   : rotate and ask for base point and angle only once
+      and apply same input,  without asking, on every next rotation 
+
+C   : copy and ask for base point and next point
+c   : copy and ask for base point and next point only once
+      and apply same input,  without asking, on every next copy 
+
+M   : move and ask for base point and next point
+m   : move and ask for base point and next point only once
+      and apply same input,  without asking, on every next move 
+
+S   : scale and ask for base point and scale factor
+s   : scale and ask for base point and scale factor only once
+      and apply same input,  without asking, on every next scale 
+
+99  : maximal number which can be added for repeating the string
+
+In this command RETURN is not required to finish the keyboard input.
+After typing PEN you will see 'RrCcMmSs:' prompt, in response, type 
+only what you see in a prompt, only to 4 letters in length. After typing
+4 letters or RETURN, prompt is changing to 'Number:' and you can type 
+only 1 or 2 digit number. After typing 1 digit and RETURN or 2 digits,
+command automaticaly goes further depending on typed combination.
+If you type non legal letter '?' will appear on its place and will be 
+retyped with next legal letter.
+
+Your imagination is a limit, but stupid action strings will be processed
+as well, so string 'MMMM99' will ask 99 times for 4 moves, which is just
+one big stupid move, etc.
+
+Good luck !
+

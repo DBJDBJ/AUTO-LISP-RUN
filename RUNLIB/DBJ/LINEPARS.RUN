@@ -1,0 +1,170 @@
+;;
+;;  Author's : DBJ & PJK
+;;  Function :
+;;  Synopsys :
+;;  
+;;  Date     : 25.03.92
+;;  Mods :-    25.03.92  delimiter as a input parameter
+;---------------------------------------------------------------..
+;This function takes a string (dr) and breaks it down into
+;a list of numbers and strings and returns this list.
+;Unquoted non-numerical data is converted to strings.
+;   dr= string to be broken (argument)
+;   dli    = list of atoms (returned)
+;   dle    = length of string
+;---------------------------------------------------------------..
+
+(setq runfun
+(lambda ( dr  delimiter / prat )
+
+(defun prat (dr  delimiter / 
+             numorstr findnchar findnblk findchar findtype s2l )
+;---------------------------------------------------------------..
+;This function returns the first nonblank character's position
+;in a string starting at fchr. Returns nil if all blanks.
+(defun findnblk (s fchr / a b)
+ (setq a (strlen s) b nil)
+ (while (<= fchr a)
+  (if (= (substr s fchr 1) " ")
+   (setq fchr (1+ fchr))
+   (setq b fchr fchr (1+ a))
+  )
+ ) 
+ (eval 'b)
+)
+;This function searchs for non-numeric chars (not +-.0123456789)
+;Returns nil if numbers or "STR" if not a number
+(defun numorstr (s / a b c d)
+ (setq a (strlen s) d nil c 1)
+ (while (<= c a)
+  (setq b (ascii (substr s c 1)))
+  (cond
+   ((or (= b 43) (= b 45) (= b 46))); do nothing
+   ((and (>= b 48) (<= b 57))); do nothing
+   (T ; must be something else
+    (setq d "STR" c a)
+   )   
+  )
+  (setq c (1+ c))
+ )
+ (eval 'd)
+)
+;---------------------------------------------------------------..
+;findnchar finds & returns the number of times a string
+; appears within a string
+;   dstr=String to search thru
+;   char=characters to search for
+; if the chars are not found, 0 is returned
+(defun findnchar (dstr char / a b ld lc)
+ (setq ld (strlen dstr) lc (strlen char) a 0 b 1)
+ (while (<= b ld)
+  (if (equal char (substr dstr b lc)) ; match found
+   (setq a (1+ a))
+  )
+  (setq b (1+ b))
+ )
+ (eval 'a)
+)
+;---------------------------------------------------------------..
+;findchar finds & returns the position of a string within a string
+;   datastr=String to search thru
+;        st=starting point
+;       dir=direction (+1 to move toward end)
+;                     (-1 to move toward start)
+;      char=characters to search for
+; if the chars are not found, nil is returned
+(defun findchar (datastr st dir char / ld lc endse en a)
+ (setq ld (strlen datastr) lc (strlen char) endse 0 a nil)
+ (if (= dir 1) (setq endse (1+ ld)))
+ (while (/= st endse)
+  (cond
+   ((= char (substr datastr st lc)) ; match found
+    (setq a st st endse)
+   )
+   (t
+    (setq st (+ st dir))
+   )
+  )
+ )  
+ (eval a)
+)
+;---------------------------------------------------------------..
+;This function determines the type of data that a string matches.
+;Returns an integer if string is an integer, a real if string
+;is a real or a station string (ex. 12+05.35), or itself if
+;neither of the above.
+(defun findtype (s / a b c d e f g h)
+ (setq a (strlen s) b s)
+ (setq c (numorstr s))
+ (cond 
+  ((= c "STR")); do nothing
+  (t   
+   (setq c (findnblk s 1))
+   (if (> c 1) (setq s (substr s c) a (strlen s)))
+   (setq c (findchar s 1 1 "-") d (findnchar s "-"))
+   (setq e (findchar s 1 1 ".") f (findnchar s "."))
+   (setq g (findchar s 1 1 "+") h (findnchar s "+"))
+   (cond
+    ((or (> c 1) (> d 1) (> f 1) (> h 1) (= g a) (= g 1)));string
+    ((and (/= g nil) (/= c nil)));string
+    ((= g nil) (setq b (read s)))
+    ((/= g nil)
+     (setq c (abs (fix (read (substr s 1 (1- g))))))
+     (setq d (atof (substr s (1+ g))))
+     (setq b (+ (* 100.0 c) d))
+    )  
+   )   
+  ) 
+ ) 
+ (eval 'b)
+)
+;;
+;; s2l 02.03.92 DBJ created
+;; parser which returns list of words 
+;; regarding what is typed in
+;;
+(defun s2l ( s ; string line
+	     d ; word delimiter ascii code
+	   / cl; character list 
+	      e; element of cl
+	     pl; parsed list 
+	     w ; word
+	   )
+;
+; string to list of char's by DBJ
+;
+(defun s2c (pos s)
+  (cond 
+      ((<= pos (strlen s)) (s2c (1+ pos) s)
+	(setq cl (cons (substr s pos 1) cl))
+      )
+      (T (setq cl '()))
+   );cond
+);s2c
+;
+; begin s2l
+;
+(s2c 1 s) ; make cl
+(setq w "" pl '() ) 
+(foreach e cl
+  (cond
+;    ((= d (ascii e))(if (/= w "")(setq pl (cons (findtype w) pl)  w "")))
+    ((= d (ascii e))(if (/= w "")(setq pl (cons w pl)  w "")))
+    (T (setq w (strcat w e)))
+  );cond
+);foreach
+(if (/= w "")(setq pl (cons (findtype w) pl)  w ""))
+(reverse pl) ; return list 
+);s2l
+;
+; begin prat
+;
+(s2l dr delimiter )
+;
+) ; prat defun 
+;
+; begin lambda
+;
+(prat dr (ascii delimiter))
+); lambda
+); function

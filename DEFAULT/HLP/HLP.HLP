@@ -1,0 +1,33 @@
+-----------------------------------------------------------------------------
+enviroment : DEFAULT
+list of functions available
+    ?<function> are help texts for every <function>
+-----------------------------------------------------------------------------
+         ?run             ; general help on run command
+exit     ?exit            ; exiting the system
+test     ?test            ; for developers only
+name     ?name            ; prefix and a name of curent drawing
+new      ?new             ; new drawing called from drawing editor
+gol      ?gol             ; last dwg
+gob      ?gob             ; go to block file
+upd      ?upd             ; update the external block
+swap     ?swap            ; swap two entity sets
+sly      ?sly             ; select layer entity is on
+fly      ?fly             ; freeze lay entity is on
+gly      ?gly             ; go on layer entity is on
+dbjbox   ?dbjbox          ; draw the box
+dbjprl   ?dbjprl          ; two parallel lines
+hat      ?hat             ; hatching by pointing on vertices
+chgtext  ?chgtext         ; find & replace on sset of text
+dbjust   ?dbjust          ; text justification change
+dbjdim   ?dbjdim          ; dim vars setup
+dbjtab   ?dbjtab          ; tablet configuration
+ers      ?ers             ; line intersection osnap
+ref      ?ref             ; reference point osnap
+ssx      ?ssx             ; ssget x osnap
+cht      ?cht             ; change multiple text ent's
+d&t      ?d&t             ; date & time
+eye      ?eye             ; for fast perspectives
+pen      ?pen             ; do fiew actions at once , and repeat
+inherit  ?inherit         ; from entity to entity 
+layer    ?layer           ; more layer fiddling 

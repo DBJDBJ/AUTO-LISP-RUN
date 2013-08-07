@@ -1,0 +1,10 @@
+----------------------------------------------------------------------------
+a1plot
+
+Creates a plot file of a present drawing for an a1 sheet and by
+ajacad pen setup. asks for a scale before plotting. 
+generaly this is an v10 function. it works by preparing, executing 
+and deleting a script file for plotting. use it on local plotters
+in model space, for a check plots.
+
+Every plt file produced by this function will be in \plt directory.

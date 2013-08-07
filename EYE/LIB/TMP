@@ -1,0 +1,34 @@
+; attupd.lsp dbj created 22.05.92
+;............................................................................
+; update atr ref. by tag in blok ref. by its enty name
+; if not found return nil ...
+; 31/05/91 dbj created
+;
+(setq function
+(lambda ( blknam      ; block name
+          atrstr      ; atr's tag  string
+          newval      ; new value  string
+          / ss atrlst )
+      (if (/= 'str (type newval))
+          (cond ((= 'int (type newval))
+	         (setq newval (itoa newval))
+                )
+		((= 'real (type newval))
+		 (setq newval (rtos newval))
+                )
+		(t (prompt "\nIllegal value type in attupd function...")
+		   (exit)
+		)
+          ) ; cond
+      ) ; if
+      (setq ss (call '("lib/aname" blknam atrstr))) ; attr. enty name
+      (if (/= ss nil)
+         (progn
+          (setq atrlst (entget ss))
+          (entmod (subst (cons 1 newval) (assoc 1 atrlst) atrlst))
+	  (entupd ss)
+	  (entupd blknam)
+         )
+      )
+      ss ; return att's ename
+));

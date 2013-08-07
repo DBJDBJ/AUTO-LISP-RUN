@@ -1,0 +1,5 @@
+----------------------------------------------------------------------
+new
+puts you in to the new drawing if such exist, with quiting or ending
+of the current one. if drawing does not exist you are landed in the
+main menu.

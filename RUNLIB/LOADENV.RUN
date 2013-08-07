@@ -1,0 +1,37 @@
+; loadenv.run
+; DBJ created
+; new environment loading which is a file with (setq funlst (....)) 
+; which will overwrite current funlst global list
+; if "#" was sent, just show available environments
+; ie content of a file named 'table.env' in runpath directory
+; run::envname is a reserved global 
+;
+(setq runfun
+(lambda ( newenv / return )
+    (setq *error* run::errhandler )
+    (setq newenv (strcase newenv T))
+    (cond ( (= "#" newenv)
+	    (run::call '("dumptxt" (strcat run::home "/table.env")))
+	    (setq return T)
+          )
+          ( (= "##" newenv) ; load default environment
+	    (run::call '("loadenv" "default"))
+          )
+    (T
+      (if (= "#" (substr newenv 1 1))
+        (setq newenv (substr newenv 2 (1- (strlen newenv)))) ; take it off 
+      )
+	(if (= "not" (load (strcat run::home "/" newenv "/" newenv ".env") "not" ))
+            (prompt (strcat "\nUnable to load environment [" newenv "]"))
+            (progn
+	     ; important globals ...
+              (setq  	run::envname newenv
+                    	run::envpath (strcat run::home "/" run::envname ))
+		     return     T
+            ) ; progn
+        ) ; if
+    ) 
+    ) ; cond 
+  return
+) ; lambda        
+) ; setq 

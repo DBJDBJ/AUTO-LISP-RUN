@@ -1,0 +1,528 @@
+
+
+--------------------------------------------------------------------------------
+ ALLY - A Lisp Analyzer (tm)  Version 1.32                            Page:  1
+ Source file: C:\CAD\RUNENV\DBJ\IMAG.LSP                    14:18:22  03/04/92
+--------------------------------------------------------------------------------
+
+--------------------------------
+ 0 ERRORS AND WARNINGS REPORTED 
+--------------------------------
+ No errors found.
+
+-----------------------------------------------
+ FILE HIERARCHY OF 5 PROGRAM DEFINED FUNCTIONS 
+-----------------------------------------------
+ global
+  +--lambda#1 (4-7)
+  +--imag (11-53)
+  +--lineline (57-59)
+  +--linearcirc (63-65)
+  +--cirarc (69-71)
+
+------------------------------------------------
+ CROSS-REFERENCE OF 5 PROGRAM DEFINED FUNCTIONS 
+------------------------------------------------
+ dec=declared: identifies the scope of the function
+ cal=called  def=defined  ref=referenced  set=set
+
+ cirarc
+   undeclared (global)
+   def in (global) 69
+   cal in imag 50
+
+ imag
+   undeclared (global)
+   def in (global) 11
+   cal in lambda#1 5
+
+ lambda#1
+   undeclared (global)
+   def in (global) 4
+
+ linearcirc
+   undeclared (global)
+   def in (global) 63
+   cal in imag 41
+
+ lineline
+   undeclared (global)
+   def in (global) 57
+   cal in imag 27
+
+
+------------------------------------------------
+ CROSS-REFERENCE OF 102 PROGRAM DEFINED SYMBOLS 
+------------------------------------------------
+ dec=declared: identifies the scope of the symbol
+ ref=referenced   set=set
+
+ a
+   dec in imag 11
+
+ aa
+   dec in imag 15
+
+
+
+
+--------------------------------------------------------------------------------
+ ALLY - A Lisp Analyzer (tm)  Version 1.32                            Page:  2
+ Source file: C:\CAD\RUNENV\DBJ\IMAG.LSP                    14:18:22  03/04/92
+--------------------------------------------------------------------------------
+
+
+ aa4
+   dec in imag 15
+
+ ac
+   dec in imag 14
+
+ ad2
+   dec in imag 15
+
+ ad8
+   dec in imag 15
+
+ ang
+   dec in imag 14
+
+ b
+   dec in imag 12
+
+ b2
+   dec in imag 15
+
+ bb
+   dec in imag 15
+
+ c
+   dec in imag 12
+
+ cc
+   dec in imag 15
+
+ d
+   dec in imag 12
+
+ dd
+   dec in imag 15
+
+ dd4
+   dec in imag 15
+
+ dis
+   dec in imag 15
+
+ e1
+   dec in cirarc 69
+
+ e1
+   dec in imag 11
+   set in imag 21,40
+   ref in imag 22,27,40,41,50
+
+ e1
+   dec in linearcirc 63
+
+ e1
+   dec in lineline 57
+
+
+
+
+
+--------------------------------------------------------------------------------
+ ALLY - A Lisp Analyzer (tm)  Version 1.32                            Page:  3
+ Source file: C:\CAD\RUNENV\DBJ\IMAG.LSP                    14:18:22  03/04/92
+--------------------------------------------------------------------------------
+
+ e2
+   dec in cirarc 69
+
+ e2
+   dec in imag 11
+   set in imag 21,40
+   ref in imag 22,27,40,41,50
+
+ e2
+   dec in linearcirc 63
+
+ e2
+   dec in lineline 57
+
+ e3
+   undeclared (global)
+   set in imag 40
+   ref in imag 40
+
+ ee
+   dec in imag 15
+
+ ff
+   dec in imag 15
+
+ i
+   dec in imag 13
+
+ j
+   dec in imag 13
+
+ k
+   dec in imag 13
+
+ k1
+   dec in imag 13
+
+ k2
+   dec in imag 13
+
+ k3
+   dec in imag 13
+
+ k4
+   dec in imag 13
+
+ l
+   dec in imag 16
+
+ l1b
+   dec in imag 11
+
+ l1e
+   dec in imag 11
+
+ l2b
+   dec in imag 11
+
+
+
+
+--------------------------------------------------------------------------------
+ ALLY - A Lisp Analyzer (tm)  Version 1.32                            Page:  4
+ Source file: C:\CAD\RUNENV\DBJ\IMAG.LSP                    14:18:22  03/04/92
+--------------------------------------------------------------------------------
+
+
+ l2e
+   dec in imag 11
+
+ m
+   dec in imag 16
+
+ m1
+   dec in imag 16
+
+ m2
+   dec in imag 16
+
+ n
+   dec in imag 16
+
+ name1
+   dec in imag 11
+   set in imag 22
+   ref in imag 26,34,36,47
+
+ name2
+   dec in imag 11
+   set in imag 22
+   ref in imag 26,33,37,40,48
+
+ o1
+   dec in imag 11
+   set in imag 19
+   ref in imag 21,40
+
+ o2
+   dec in imag 11
+   set in imag 21,40
+   ref in imag 21
+
+ p
+   dec in imag 12
+
+ p1
+   dec in imag 16
+
+ p2
+   dec in imag 16
+
+ pdis
+   dec in imag 14
+
+ psel
+   dec in imag 15
+
+ pt
+   dec in imag 11
+
+ q
+   dec in imag 12
+
+
+
+
+
+--------------------------------------------------------------------------------
+ ALLY - A Lisp Analyzer (tm)  Version 1.32                            Page:  5
+ Source file: C:\CAD\RUNENV\DBJ\IMAG.LSP                    14:18:22  03/04/92
+--------------------------------------------------------------------------------
+
+ r
+   dec in imag 11
+
+ r1
+   dec in imag 14
+
+ r2
+   dec in imag 14
+
+ s
+   dec in imag 12
+
+ th
+   dec in imag 14
+
+ th1
+   dec in imag 14
+
+ th2
+   dec in imag 14
+
+ th3
+   dec in imag 14
+
+ th4
+   dec in imag 14
+
+ thm
+   dec in imag 15
+
+ thp
+   dec in imag 15
+
+ x
+   dec in imag 14
+
+ x1
+   dec in imag 12
+
+ x10
+   dec in imag 12
+
+ x11
+   dec in imag 12
+
+ x12
+   dec in imag 12
+
+ x13
+   dec in imag 12
+
+ x2
+   dec in imag 12
+
+ x3
+   dec in imag 12
+
+
+
+
+
+--------------------------------------------------------------------------------
+ ALLY - A Lisp Analyzer (tm)  Version 1.32                            Page:  6
+ Source file: C:\CAD\RUNENV\DBJ\IMAG.LSP                    14:18:22  03/04/92
+--------------------------------------------------------------------------------
+
+ x4
+   dec in imag 12
+
+ x5
+   dec in imag 12
+
+ x6
+   dec in imag 12
+
+ x7
+   dec in imag 12
+
+ x8
+   dec in imag 12
+
+ x9
+   dec in imag 12
+
+ xm
+   dec in imag 13
+
+ xm1
+   dec in imag 16
+
+ xm2
+   dec in imag 16
+
+ xp
+   dec in imag 13
+
+ xp1
+   dec in imag 16
+
+ xp2
+   dec in imag 16
+
+ xx1
+   dec in imag 13
+
+ xx2
+   dec in imag 13
+
+ xx3
+   dec in imag 13
+
+ xx4
+   dec in imag 13
+
+ xym
+   dec in imag 11
+
+ xym1
+   dec in imag 16
+
+ xym2
+   dec in imag 16
+
+
+
+
+
+--------------------------------------------------------------------------------
+ ALLY - A Lisp Analyzer (tm)  Version 1.32                            Page:  7
+ Source file: C:\CAD\RUNENV\DBJ\IMAG.LSP                    14:18:22  03/04/92
+--------------------------------------------------------------------------------
+
+ xyo2
+   dec in imag 16
+
+ xyp
+   dec in imag 11
+
+ xyp1
+   dec in imag 16
+
+ y
+   dec in imag 14
+
+ y1m
+   dec in imag 13
+
+ y1p
+   dec in imag 13
+
+ y2m
+   dec in imag 14
+
+ y2p
+   dec in imag 14
+
+ ym
+   dec in imag 13
+
+ yp
+   dec in imag 13
+
+
+-------------------------
+ 71 LINE PROGRAM LISTING 
+-------------------------
+    1  ; 
+    2  ; 24.02.92 DBJ prepared 
+    3  ; IMAG.lsp by Chriss Fawcet 136N. Water St. Ste.203, Kent, OH 44240 USA 
+    4  (setq function   (lambda ( ) 
+    5                          (imag) 
+    6                          (princ) 
+    7                  ) ; lambda 
+    8  ) ; of function 
+    9  ;........................................................... 
+   10  ; 
+   11  (defun imag ( / o1 o2 e1 e2 xym xyp name1 name2 l1b l1e l2b l2e pt r a 
+   12                  b p q c d s x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 x11 x12 x13 
+   13                  i j k1 k2 k3 k4 k xx1 xx2 xx3 xx4 xp yp xm ym y1p y1m 
+   14                  y2p y2m x y pdis m dis r1 r2 ac th1 th2 th3 th4 th ang 
+   15                  thp thm psel m dis aa bb cc dd ff ad2 b2 ee aa4 ad8 dd4 
+   16                  l m n xm1 xp1 xm2 xp2 xyp1 xym1 xyo2 xym2 p1 p2 m1 m2 
+   17             ) 
+   18  (setvar "cmdecho" 0) 
+   19  (prompt "\nSelect object: ")(setq o1 (entsel)) 
+   20  (prompt "\nSecond object: ") 
+   21  (setq o2 (entsel) e1 (entget (car o1)) e2 (entget (car o2)) 
+   22        name1 (cdr (assoc 0 e1)) name2 (cdr (assoc 0 e2))) 
+   23  ; 
+
+
+
+
+--------------------------------------------------------------------------------
+ ALLY - A Lisp Analyzer (tm)  Version 1.32                            Page:  8
+ Source file: C:\CAD\RUNENV\DBJ\IMAG.LSP                    14:18:22  03/04/92
+--------------------------------------------------------------------------------
+
+   24  ; line and line 
+   25  ; 
+   26  (if (and (= name1 "LINE")(= name2 "LINE")) 
+   27      (command (lineline e1 e2)) 
+   28  ) 
+   29  ; 
+   30  ; line and arc or circle 
+   31  ; 
+   32  (if (or 
+   33         (and (= name2 "LINE") 
+   34           (or (= name1 "CIRCLE")(= name1 "ARC")) 
+   35         ) 
+   36         (and (= name1 "LINE") 
+   37           (or (= name2 "CIRCLE")(= name2 "ARC")) 
+   38         ) 
+   39      );or 
+   40      (if (= name2 "LINE")(setq e3 e1 e1 e2 e2 e3 o2 o1)) ; if 
+   41      (command (linearcirc e1 e2))  
+   42  );if 
+   43  ; 
+   44  ; circle and arc 
+   45  ; 
+   46  (if (and 
+   47        (or (= name1 "ARC")(= name1 "CIRCLE")) 
+   48        (or (= name2 "CIRCLE")(= name2 "ARC")) 
+   49      ) 
+   50      (command (cirarc e1 e2)) 
+   51  ); if 
+   52  (princ) 
+   53  ) ; eofun imag 
+   54  ;........................................................... 
+   55  ; edge edge intersection  
+   56  ;  
+   57  (defun lineline ( e1 e2 ) 
+   58  
+   59  ) ; eofun lineline 
+   60  ;........................................................... 
+   61  ; edge and arc or circle intersection  
+   62  ;  
+   63  (defun linearcirc ( e1 e2 ) 
+   64  
+   65  ) ; eofun linearcirc  
+   66  ;........................................................... 
+   67  ; arc / circle intersection  
+   68  ;  
+   69  (defun cirarc ( e1 e2 ) 
+   70  
+   71  ) ; eofun cirarc 
+
+
+
+
+
+
+
+
+
+
+

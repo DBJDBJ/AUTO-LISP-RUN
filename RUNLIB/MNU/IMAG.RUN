@@ -1,0 +1,10 @@
+;;
+;;imag.run
+;;
+(setq runfun
+(lambda ()
+   (if (/= runenvname "default")
+       (runcall '("loadenv" "default"))
+   )
+       (call "imag")
+));imag

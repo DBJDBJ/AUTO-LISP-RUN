@@ -1,0 +1,6 @@
+---------------------------------------------------------------------------
+hat
+
+Hatching by pointing to vertices of a area to be hatched, not to the
+entities. 
+Hatch pattern is to be set from acad regular menu before entering RUN. 

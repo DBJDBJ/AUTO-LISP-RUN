@@ -1,0 +1,5 @@
+--------------------------------------------------------------------
+dbjdim
+sets dimensioning variables for different scales. this function does
+not do nothing with or about saving dim styles, or dimscale variable.
+it actualy imposes ajacad dimensioning style onto the drawing.

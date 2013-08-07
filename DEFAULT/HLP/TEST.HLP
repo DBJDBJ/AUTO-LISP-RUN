@@ -1,0 +1,12 @@
+;
+;11.11.91 test.lsp dbj created
+;
+(mapcar       '  (lambda ( dummy )
+                        (textscr)
+                        (prompt "\ncurrent memory state :")
+                        (mem)
+                        (getstring "\nreturn ...")
+                        (princ)
+                ) ; lambda
+               '( nil )
+) ; of mapcar

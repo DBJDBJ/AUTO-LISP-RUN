@@ -1,0 +1,26 @@
+; dumptxt.run
+; file name must be preceded with a path otherwise will not be
+; found
+;
+(setq runfun
+(lambda ( funstr / f n)
+        ( setq *error* run::errhandler )
+	(prompt "\nUser name: ")(princ (getenv "USERNAME"))(terpri)
+          (if (findfile funstr)
+                  (progn (setq f (open funstr "r") n 1)
+                          (textscr)
+                          (while (setq s (read-line f))
+                                 (prompt s)(terpri)
+                                 (setq n (1+ n))
+                                 (if (> n 23)
+                                     (setq n (getstring "\nPress return key...\n")
+                                           n 1
+                                     )
+                                 );if
+                          )
+                         (close f)
+                  );progn
+           (prompt (strcat"\nWarning: unable to find " funstr))
+          );if
+  ) ; lambda
+  ) ; runfun

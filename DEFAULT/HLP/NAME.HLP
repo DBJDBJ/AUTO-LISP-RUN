@@ -1,0 +1,4 @@
+--------------------------------------------------------------------
+name
+displays the path and a name of a current drawing, on command line
+and on a status line.

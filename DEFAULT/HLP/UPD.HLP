@@ -1,0 +1,7 @@
+-----------------------------------------------------------------------------
+
+upd
+
+updates block whit it's file presentation if such file exists. will not
+look for files in another directories. use it with gob and gol functions.
+

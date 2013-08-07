@@ -1,0 +1,4 @@
+; rtd.lsp
+(setq runfun 
+(lambda (a) (/ (* a 180.0) pi))    ; radians to degrees
+)

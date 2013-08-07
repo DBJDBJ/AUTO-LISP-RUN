@@ -1,0 +1,10 @@
+#-----------------------------------------------------------------------------
+enviroment : DBJ
+list of functions available
+    ?<function> is help text for every <function>
+-----------------------------------------------------------------------------
+exit                      ; exiting the system
+test                      ; for developers only
+dbjtri   ?dbjtri          ; fill the polyline with 3d faces
+dbjhid   ?dbjhid          ; and hide their common edges ...
+filmroll                  ; creating a proper filmroll file     

@@ -1,0 +1,10 @@
+;;
+;;new.run
+;;
+(setq runfun
+(lambda ()
+   (if (/= runenvname "default")
+       (runcall '("loadenv" "default"))
+   )
+       (call "new")
+));new

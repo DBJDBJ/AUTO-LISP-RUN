@@ -1,0 +1,6 @@
+-----------------------------------------------------------------------------
+chgtext
+change text
+changes all instances of a string in every text entity selected . think
+of it as a search&replace on meny text lines in the drawing selected
+with c, w etc.. utility . 

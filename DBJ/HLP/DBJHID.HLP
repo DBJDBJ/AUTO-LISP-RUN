@@ -1,0 +1,11 @@
+
+--------------------------------------------------------------------------- 
+dbjhid
+
+Hide common edges of 3d faces
+
+After filling the polygon boundary with 3d faces, this function will
+find and hide all common edges of them. After shading such a groups of
+3d faces will appear as a one face. Polygons with arcs are not
+currently supported.
+

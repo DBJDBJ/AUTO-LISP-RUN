@@ -1,0 +1,7 @@
+--------------------------------------------------------------------------- 
+cht
+change text 
+changes selection of text entities in a drawings. all attributes of
+text can be changed, aither on single or multiple strings at once.
+search & replace is also incorporated. undo is possible without 
+exiting.  

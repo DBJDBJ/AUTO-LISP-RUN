@@ -1,0 +1,5 @@
+---------------------------------------------------------------------
+fly
+freezes layer on which selected entity resides. works also on
+a set of entities freezing every layer in sequence on which 
+selected entity are. current layer is not freezed.

@@ -1,0 +1,34 @@
+;
+; run::startup.run DBJ created 20.12.92
+;
+;
+(defun run::startup ()
+(prompt "\n(c) AJACAD Group Dec 1991 RUN system V 2.20")
+; reserved globals
+(setq runpath 	   (getenv "RUNENVPATH")
+      run::home    runpath ; gradualy replacing runpath with run::home
+      run::symdir  	   (getenv "RUNSYMDIR")
+      ) 
+(if (null runpath)
+    (progn     (textscr)
+               (prompt "\nAcad.lsp AutoLisp error ...")
+               (prompt "\nRUNPATH global not defined ...") 
+               (prompt "\nRUN system not loaded ...") 
+	       (prompt "\nCall system administrator for help ...")
+    ) ; progn
+    ( if ; else wake up the RUN system
+	 (= nil (findfile (strcat run::home "/run.run")))
+   	 (progn     (textscr)
+       	        (prompt "\nAcad.lsp AutoLisp error ...")
+       	        (prompt "\nRUNPATH global is defined ...") 
+       	        (prompt "\nbut is not good ...") 
+                (prompt "\nCall system administrator for help ...")
+          ) ; progn
+	 (progn
+               (load (strcat run::home "/run.run")) ; core functions
+               (setq run::envname "default")       ; environment name
+         )
+    );if
+); if 
+(princ)
+) ; eofun Startup

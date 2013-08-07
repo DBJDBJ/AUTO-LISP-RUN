@@ -1,0 +1,17 @@
+;
+;          dbj 24.02.92 exit.run made
+;          dbj 31.01.92 will do only scripts on $HOME path
+;          dbj 17.01.92 exit.scr feature added
+; exit.lsp dbj 15.11.91 created
+; 			happens uppon run.run exiting
+(setq  runfun
+   (lambda ()
+	(setq *error* run::errhandler)
+	(if (= nil run::home)(run::errhandler "run::home not defined upon EXIT.run entering."))
+	 (setvar "cmdecho" 0)
+         (prompt "\nExiting, type run to enter again ...")
+         ;  (command ".menu" "acad")
+	 (run::call '("doscr" (strcat run::home "/exit.scr")))
+	 (graphscr)
+   ) ; lambda 
+) ; function

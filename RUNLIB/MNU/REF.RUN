@@ -1,0 +1,10 @@
+;;
+;;ref.run
+;;
+(setq runfun
+(lambda ()
+   (if (/= runenvname "default")
+       (runcall '("loadenv" "default"))
+   )
+       (call "ref")
+));ref

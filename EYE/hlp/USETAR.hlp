@@ -1,0 +1,41 @@
+;
+; usetar.lsp dbj 27.05.92 created
+;...........................................................................
+(setq function
+(lambda ( / tarblk eyeset eyedata e oldlay )
+  (setq  *error* runerr
+         oldlay (call "lib/enter")
+        eyedata (call '("lib/blk" "eyedata"))
+        tarblk  (call '("lib/getet" "target")))
+  (cond
+    ((= nil eyedata)
+    (prompt "\nNo eyedata in this drawing, put some eyes first ..."))
+    ((= nil tarblk) (prompt "\nNo target selected ... ") )
+    (T
+      (setq eyedata (call '("lib/attval" tarblk "eyes")) ; string of int's
+            eyedata (runcall '("dbj/linepars" eyedata " ")) ; list of strings
+            eyedata (cdr eyedata) ; first is not used as a eye number
+            eyeset  (ssget "x" (list (cons 2 "EYE"))); all eyes
+	    ;now substitute eye numbers with enames of blocks
+	    eyedata (foreach e eyedata ; to list of integers 
+	               (setq 
+		         eyedata (subst 
+			          (call '("lib/getbyatt" "eyenumber" e eyeset)) 
+				  e 
+				  eyedata)
+		       )	
+                    ) ; foreach
+      );setq
+        (foreach e eyedata
+        );foreach
+        (foreach e eyedata
+          (grdraw (call '("lib/sls" 10 (entget e)))
+                  (call '("lib/sls" 10 (entget tarblk))) 1)
+	   (getstring "\nHit Return for the view ...")
+           ;let's see the perspectives
+           (call '("lib/viewet" e tarblk) )
+        );foreach
+    ) ; of T
+  );cond
+  (call '("lib/leave" oldlay))
+)) ; end of usetar 

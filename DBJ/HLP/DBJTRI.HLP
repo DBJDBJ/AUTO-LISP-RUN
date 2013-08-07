@@ -1,0 +1,13 @@
+
+--------------------------------------------------------------------------- 
+dbjtri
+
+Polygon triangulation
+
+Fill the polygon boundary with 3d faces, so it can be shaded or finite
+element calculation can be done on it.3Dfaces can be trilaterals or
+quadrilaterals,ie triangles or quad's.
+Works on one polygon in one go. If it is really the big one, ie more than
+100 vertices, be sure that you have some time and plenty of memory.
+Resulting faces are placed on layer "3dface".
+Polygons with arcs are not currently supported.

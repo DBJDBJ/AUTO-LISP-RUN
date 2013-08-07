@@ -1,0 +1,52 @@
+;
+; neweoldt.lsp dbj 27.05.92 created
+; new eye old target pairing
+;...........................................................................
+(setq function
+(lambda ( / tarblk eyeblk eyedata oldlay )
+  (setq  *error* runerr oldlay (call "lib/enter"))
+  (setq eyedata (call '("lib/blk" "eyedata")))
+  (if (= nil eyedata) (progn
+      (command ".insert" (strcat envpath "dwg\\eyedata") "0,0,0" 1 1 0 )
+      (setq eyedata (call '("lib/blk" "eyedata")))
+  ))
+  (setq eyeblk (call "lib/poseyebl")) ;ename
+  (setq tarblk (call '("lib/getet" "target"))) 
+  (prompt "\nUpdating EYE-TARGET database, please wait ...")
+  (call '("lib/updeyeda" eyedata
+           (itoa (1+ (read (call "lib/lasteyen"))))
+          ""                      ; don't update last target num. 
+          (strcat "EYE" 
+           (itoa (1+ (read (call "lib/lasteyen"))))
+	  ) ; what was last
+	  ""                      ; don't touch default height
+	  ""                      ; don't touch default lens length
+  ))
+  (prompt "\nUpdating GLOBAL data finished ...")
+  (call '("lib/updeyeat" 
+           eyeblk
+          (call "lib/lasteyen") ; last eye
+          (call "lib/lasttarn") ; last target
+	   (rtos 
+	     (distance          ; to target
+	       (call '("lib/sls" 10 (entget eyeblk)))
+	       (call '("lib/sls" 10 (entget tarblk)))
+	     )
+	   ) 
+	   (call "lib/deflens") ; lens length 
+	   "no clipping"        ; clipping
+         ))
+  (prompt "\nUpdating EYE finished ...")
+  (call '("lib/updtarat" tarblk
+         (call "lib/lasteyen")
+         (call "lib/lasttarn") 
+         ))
+  (prompt "\nUpdating TARGET finished ...")
+(grdraw
+  (call '("lib/sls" 10 (entget eyeblk)))
+  (call '("lib/sls" 10 (entget tarblk)))
+  1
+)
+(call '("lib/leave" oldlay))
+eyeblk ; return ename of last "eye"
+)) ; end of neweoldt

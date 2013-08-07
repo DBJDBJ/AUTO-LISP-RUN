@@ -1,0 +1,8 @@
+;;
+;;fly.run
+;;
+(setq runfun
+(lambda ()
+   (if (/= runenvname "default") (runcall '("loadenv" "default")))
+       (call "fly")
+));fly

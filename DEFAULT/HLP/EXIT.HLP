@@ -1,0 +1,14 @@
+;
+; exit.lsp dbj 15.11.91 created
+; 			happens uppon run.lsp exiting
+(mapcar
+	'(lambda (dummy)
+         (prompt "\nexiting, type run to enter again ...")
+         "exit"
+         )
+        '(nil)
+)
+
+this is a single function for leaving a system. it is called with
+call.lsp and is a ideal place for implementing every control to
+happen just before leaving the system.

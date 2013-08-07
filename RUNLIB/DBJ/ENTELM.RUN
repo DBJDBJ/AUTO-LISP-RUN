@@ -1,0 +1,5 @@
+; entelm.lsp dbj created
+; entelm from entity list
+(setq runfun
+(lambda ( ass entlst )(cdr (assoc ass entlst )))
+)

@@ -1,0 +1,6 @@
+------------------------------------------------------------------------------
+gol
+puts you back into the last visited drawing. keeps track just of a last and
+not any other drawing so if you are going from a.dwg to b.dwg to c.dwg, gol
+will put you in b.dwg and after that gol will put you in c.dwg, becouse it
+was a last drawing before entering b.dwg . best to use after gob.

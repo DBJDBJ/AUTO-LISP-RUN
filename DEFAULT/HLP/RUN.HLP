@@ -1,0 +1,30 @@
+----------------------------------------------------------------------------
+RUN
+Author : DBJ
+
+Command for entering ajacad group system of autocad addons and aplications
+
+Every proper command is actualy the Autolisp function or application or
+ads function or application. functions are grouped in environments to avoid
+having to many of them at once and to make flexible management of the
+system possible.
+
+Entering RUN will change menu to menu of a current environment if such exist.
+
+ '?command' will display help text for a command in autocad text screen.
+
+ '?' will display a list of all available functions in a present environment.
+
+ '#' will display all available different environments.
+
+ '#environmentname' will terminate old and load new environment, whose name
+  acts as a prompt.
+
+ '##' will load 'DEFAULT' environment
+
+ 'return' key will repeat last command if there is some, else will exit
+
+ 'exit' command will terminate current run session
+
+ Every other word will be executed if it is a command in current environment
+ or will exit to AutoCad and pass command to it.

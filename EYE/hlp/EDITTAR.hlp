@@ -1,0 +1,27 @@
+;
+; edittar.lsp dbj 02.06.92 created
+;...........................................................................
+(setq function
+(lambda ( / tarblk eyenum tarnum oldlay newpos )
+;
+  (setq  *error* runerr)
+  (cond
+    ((= nil (call '("lib/blk" "eyedata")))
+    (prompt "\nNo EYEdata in this drawing, put some eyes first ..."))
+    (T
+     (setq oldlay (call "lib/enter") tarblk  (call '("lib/getet" "target")))
+	  (cond
+            ((= nil tarblk) (prompt "\nNo target selected ... ") )
+	    (T (setq 
+	        newpos (getpoint 
+         	       (call '("lib/sls" 10 (entget tarblk))) 
+		       "\nMove the TARGET or hit RETURN ... "))
+	      (if (/= nil newpos)
+	      (command ".move" tarblk "" 
+	       (call '("lib/sls" 10 (entget tarblk))) newpos ) ; move
+              ) ; if
+	    )) ; T & cond
+    ) ; of T
+  );cond
+  (call '("lib/leave" oldlay))
+)) ; end of usetar 

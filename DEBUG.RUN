@@ -1,0 +1,174 @@
+;
+; DEBUG.RUN version of run.run 27.02.92 dbj created
+; run.run 04.11.91 dbj created running the new autolisp functions
+; run.run 27.11.91 dbj created run v2.0
+;         29.11.91 dbj runlib & run::call created & implemented
+;-----------------------------------------------------------------------------
+;function to restore system on error
+;
+(defun run::errhandler ( s ) 
+       (setvar "cmdecho" 0)
+       (if (/= s "Function cancelled")
+       		(princ (strcat "\nDebug : " s))
+       );if
+       (mem) (gc) ; garbage colection
+       (if (/= "acad" (getvar "menuname")) (command ".menu" "acad"))
+  (princ)
+)
+;
+(defun c:run ( / runcom runold n f)
+(setq olderr *error* *error* run::errhandler)
+(if (/= run::envname (getvar "menuname"))
+    (if (findfile (strcat run::envpath run::envname ".mnu"))
+       		(command ".menu" (strcat run::envpath run::envname) )
+    )
+)
+(setq runcom (chr 0) runold "exit")
+(while (/= "exit" runcom)
+(gc)
+(setq runcom (getstring nil (strcat "\nDEBUG " (substr run::envname 1 8) ": ") )
+      runcom (strcase runcom T)) ; setq 
+	(if (= (ascii runcom) 0) 
+	    (setq runcom runold) ; return pressed
+	    (setq runold runcom) ; command typed
+        ) ; if
+;
+; debuggin history preparation
+;
+(setq f (open run::debugname "w"))
+(write-line ":.............................................." f )
+(write-line (strcat "ENVIRONMENT    :" run::envname) f)  
+(write-line (strcat "BEGIN COMMAND  :" runcom ) f)  
+(write-line ":.............................................." f )
+(close f)
+(if (/= runcom "exit")
+        (cond 
+              ( (= "#" (substr runcom 1 1)) ; new environment request
+		(if (run::call '("loadenv" runcom))
+		    (prompt "\nNew environment...")
+                )
+              )
+              ( (= "?" (substr runcom 1 1)) ; help request
+		(run::call '("callhlp" runcom))
+              )
+              ( (= "debug" runcom) (run::call "debug")
+              )
+              ( (= nil (member runcom runlst)); otherwise
+		(run::call '("runscr" (list (strcat home "/exit.scr") runcom)))
+		(setq runcom "exit")
+              ) 
+              ( (member runcom runlst) ; call a proper runcomand 
+                (setq runcom (run::calluser runcom))
+              )
+              (T nil)
+         );cond  
+  );if
+;
+; debuggin history finish
+;
+(setq f (open run::debugname "a"))
+(write-line ":.............................................." f )
+(write-line (strcat "END   COMMAND  :" runcom ) f)  
+(write-line ":.............................................." f )
+(close f)
+) ; while
+  (run::call "exit")
+  (setq *error* olderr)(gc)(princ)
+); end of run
+
+;-------------------------------------------------------------------------
+; call the function with or without input parameters
+; 06.11.91 dbj created
+; 25.11.91 dbj ammended to comply with V1.10
+; 26.11.91 dbj created RUN v2.00
+; 28.11.91 dbj "eval input" feature invented & implemented
+(defun run::calluser ( input / function file return )
+  (if (= 'STR (type input)) (setq input (list input))) ; if
+  (setq file (car input) 
+       input (subst 'list (car input) input)
+  ) ; setq
+  (load (strcat run::envpath "/" file))
+  ;
+  ; debugging
+  ;
+  (setq atommarker (cadr atomlist))
+  ;   
+  (debugbegin file input run::debugname )
+  (setq return (apply 'function (eval input)))
+  (debugend file return atommarker run::debugname )
+  return
+) ; call
+;.........................................................................
+; call the "RUN" system function with or without input parameters
+; all run functions must have suffix ".run" and be situated in a
+; ../runenv/runlib/ directory
+; and word "runfun" must be used as a variable name for "applying"
+; 29.11.91 dbj created
+(defun run::call ( input / runfun file return )
+  (if (= 'STR (type input)) (setq input (list input))) ; if
+  (setq file (car input) 
+       input (subst 'list (car input) input)
+  ) ; setq
+  (load (strcat run::home "/runlib/" file ".run" ))
+  ;
+  ; debugging
+  ;
+  (setq atommarker (cadr atomlist))
+  ;
+  ;   
+  (debugbegin file input run::debugname )
+  (setq return (apply 'runfun (eval input)))
+  (debugend file return atommarker run::debugname )
+return
+) ; call
+;.........................................................................
+(defun debugbegin ( func input run::debugname / f )
+   (setq f (open run::debugname "a"))
+     (cond 
+       ((/= nil f)
+	   (setq atl (reverse (member atommarker (reverse atomlist))))
+		(write-line "" f)
+		(write-line (strcat "BEGIN FUNCTION :" func) f)  
+                (princ "INPUT    :" f) (prin1 (eval input) f))
+      (T (prompt "\nCan't open debugfile in debugbegin function !"))
+     );cond
+  (close f)
+);eofun
+;.........................................................................
+(defun debugend ( func output atommarker run::debugname / f atl )
+   (setq f (open run::debugname "a"))
+     (cond 
+       ((/= nil f)
+	   (setq atl (reverse (member atommarker (reverse atomlist))))
+		(write-line "\nLEFTOVERS:"  f)  
+		(while atl
+                       (princ "SYMBOL :" f)
+		       (prin1 (car atl)  f)
+                       (princ " VALUE :" f)
+		       (cond 
+			;(
+			; (= 'LIST (type (car (atl))))
+			; (if (= nil (car (eval (car atl))))
+			;     (write-line " FUNCTION " f)
+			;     (prin1 (eval (car atl))  f)
+			; )
+                        ;)
+			(T
+			     (prin1 (eval (car atl))  f)
+			 )
+			);cond
+                       (write-line "" f)
+		       (setq atl (cdr atl))
+                );while
+                (princ "\nOUTPUT   :"  f)  (prin1 return f)
+                (write-line (strcat "\nEND FUNCTION :" func) f)
+	)
+      (T (prompt "\nCan't open debugfile in debugwrite function !"))
+     );cond
+  (close f)
+  );eofun
+;
+(setq run::debugname (strcat run::home "/DEBUG.log"))
+(prompt "\n")
+(prompt "\nRUN DEBUG V1.0 [c]1992 DBJ for Asahi Juken")
+(prompt (strcat "\nDebugging history is in a file : " run::debugname))(princ)  
